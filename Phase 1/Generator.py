@@ -12,6 +12,25 @@ import numpy as np
  
 #Generate 
 
+def sw(argument): 
+    switcher = { 
+        'د': "D", 
+        'ح': "H", 
+        'ل': "L", 
+        'ق': "GH", 
+        1: "1", 
+        2: "2", 
+        3: "3", 
+        4: "4", 
+        5: "5", 
+        6: "6", 
+        7: "7", 
+        8: "8", 
+        9: "9", 
+} 
+
+    return switcher.get(argument, "") 
+
 n = 10
 
 for x in range(n):
@@ -24,42 +43,39 @@ for x in range(n):
     top = H
     right = W
     bottom = H
+    lable =""
 
     for y in range(0,6):
         if (y==2):
-            # r = random.choice(['ط', 'د','س', 'ش', 'ک', 'ن', 'ل', 'ق', 'ص', 'ت', 'ب'])
-            r = random.choice([ 'ن', 'ل', 'ق', 'ص', 'ت'])
+            r = random.choice(['د','ح', 'ل', 'ق'])
+            #r = random.choice([ 'ن', 'ل', 'ق', 'ص', 'ت'])
+            lable = lable+sw(r)
             l = r
-            number = number + r
+            number = number + r +' '
         else:
             r = random.randint(1,9)
-            number = number + persian.enToPersianNumb(r)
+            number = number + persian.enToPersianNumb(r) +'‌'
+            lable = lable+sw(r)
+
      
     iran = "۱ ۱"
     fontsize = 85
     font = ImageFont.truetype("./../Fonts/STITRBD.TTF",fontsize)
     draw.text((W-110, (H/2)-20),iran,(10,10,10),font=font,align="center")
     
-    fontsize = 95
+    fontsize = 92
     font = ImageFont.truetype("./../Fonts/STITRBD.TTF",fontsize)
     w, h = font.getsize(number)
     d = 33
     #print(type(l))
     #print(l)
-    t , h = font.getsize(l)
-    if(h > 80):
-        fontsize = fontsize-1
-        d = 40
     while(w>330):
         fontsize = fontsize-1
         font = ImageFont.truetype("./../Fonts/STITRBD.TTF",fontsize)
         w, h = font.getsize(number)
-        t, h = font.getsize(l)
-        if(h > 80):
-            d = 40
         # print(h)
-
-
+    if(font.getsize(l)[1] > 57 ):
+        d = 36
     draw.text((60, (H/2)-d),number,(10,10,10),font=font,align='center')
     
     num = str(x)
@@ -68,6 +84,7 @@ for x in range(n):
 
     #BLUR
     img1 = img.filter(ImageFilter.BLUR)
+    # print(fontsize)
     img1.save('./Output/Noisy/Blur/Blur '+ num +'.jpg')
  
     #SALT AND PEPPER 
@@ -103,7 +120,9 @@ for x in range(n):
             rotated = new_im.rotate(n)
 
             rotated.save('./Output/Rotated/Rotated '+ Z + Y + num +'.jpg')
-
+    text_file = open("./Output/Lable/"+num+".txt", "w")
+    text_file.write(lable)
+    text_file.close()
 
             
 
