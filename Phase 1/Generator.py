@@ -17,7 +17,7 @@ def sw(argument):
         'د': "D", 
         'ح': "H", 
         'ل': "L", 
-        'ق': "GH", 
+        'ق': "G", 
         1: "1", 
         2: "2", 
         3: "3", 
@@ -31,7 +31,7 @@ def sw(argument):
 
     return switcher.get(argument, "") 
 
-n = 10
+n = 1500
 
 for x in range(n):
     img = Image.open("./../Assets/Raw.jpg")
@@ -39,10 +39,6 @@ for x in range(n):
     W, H = img.size
     r = 0
     number = ""
-    left = W
-    top = H
-    right = W
-    bottom = H
     lable =""
 
     for y in range(0,6):
@@ -88,7 +84,7 @@ for x in range(n):
     img1.save('./Output/Noisy/Blur/Blur '+ num +'.jpg')
  
     #SALT AND PEPPER 
-    m = 4
+    m = 1
     for y in range(m):
         img2 = img1
         snp = np.random.rand(H,W,3) * 255
@@ -99,7 +95,7 @@ for x in range(n):
         img2.save('./Output/Noisy/Salt & Pepper/SnP '+ Y + num +'.jpg')
 
         #Perspective
-        p = 10
+        p = 1
         for z in range(p):
             width, height = img2.size
             a = random.uniform(-1,1)
@@ -108,7 +104,16 @@ for x in range(n):
             img4 = img2.transform((new_width, height), Image.AFFINE,
                     (1, a, -xshift if a > 0 else 0, 0, 1, 0), Image.BICUBIC)
             Z = str(z)
-            img4.save('./Output/Perspective/Perspective '+ Z + Y + num +'.jpg')
+            new_size = (94,24)
+            new_im = img4.resize(new_size)
+            new = new_im.convert(mode='RGB')
+            if(x%3 == 0):
+                new.save('./../Phase 2/Plate_Recognition-LPRnet-master/valid/'+ lable+'.jpg')
+                print(new)
+            else:
+                new.save('./../Phase 2/Plate_Recognition-LPRnet-master/train/'+ lable+'.jpg')
+
+
 
             #Rotate
             n = random.randint(-45,45)
