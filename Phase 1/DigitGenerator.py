@@ -51,21 +51,22 @@ def sw(argument):
 
  
 
-n = 200
+n = 300
 
 for x in range(n):
 
     img = Image.open("./../Assets/Blank.jpg")
     new_size = (75,75)
     img = img.resize(new_size)
-    r = random.randint(1,2)
-    if (r!=1):
+    r = random.randint(1,3)
+    if (r==1):
         r = random.randint(1,9)
         TrainPath = './../Phase 2/My Learner/Train/' + sw(r) + '/'
         TestPath = './../Phase 2/My Learner/Test/' + sw(r) + '/' 
         number = persian.enToPersianNumb(r)
     else :
         number = random.choice(['ع', 'و', 'ج', 'ت', 'ص', 'ب','ن', 'م', 'ی', 'د', 'ح', 'ل', 'ق', 'س', 'ط','گ'])
+        #number='ق'
         TrainPath = './../Phase 2/My Learner/Train/' + sw(number) + '/' 
         TestPath = './../Phase 2/My Learner/Test/' + sw(number) + '/' 
 
@@ -91,7 +92,7 @@ for x in range(n):
     img = Image.composite(img, snp , mask)
     
     #Perspective
-    p = 10
+    p = 4
     for z in range(p):
         new_img = img
         width, height = img.size
@@ -115,7 +116,7 @@ for x in range(n):
         # new_size = (30,30)
         # new_img = new_img.resize(new_size)
         new_img = new_img.crop((15,15,60,60))
-        new_size = (200,200)
+        new_size = (50,50)
         new_img = new_img.resize(new_size)
 
         if(b==1):
