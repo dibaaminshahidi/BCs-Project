@@ -18,22 +18,22 @@ import scipy.stats as stats
 
 def sw(argument): 
     switcher = { 
-        'د': "D", 
-        'ح': "H", 
-        'ل': "L", 
-        'ق': "GH", 
-        'س': "S", 
-        'ط': "TA", 
-        'ی': "Y", 
-        'م': "M", 
-        'ن': "N", 
-        'ت': "T", 
-        'ب': "B", 
-        'ص': "SA", 
-        'گ': "G", 
-        'ج': "J", 
-        'ع': "E", 
-        'و': "V", 
+        # 'د': "D", 
+        # 'ح': "H", 
+        # 'ل': "L", 
+        # 'ق': "GH", 
+        # 'س': "S", 
+        # 'ط': "TA", 
+        # 'ی': "Y", 
+        # 'م': "M", 
+        # 'ن': "N", 
+        # 'ت': "T", 
+        # 'ب': "B", 
+        # 'ص': "SA", 
+        # 'گ': "G", 
+        # 'ج': "J", 
+        # 'ع': "E", 
+        # 'و': "V", 
         1: "1", 
         2: "2", 
         3: "3", 
@@ -51,24 +51,25 @@ def sw(argument):
 
  
 
-n = 300
+n = 1000
+
 
 for x in range(n):
 
     img = Image.open("./../Assets/Blank.jpg")
     new_size = (75,75)
     img = img.resize(new_size)
-    r = random.randint(1,3)
-    if (r==1):
-        r = random.randint(1,9)
-        TrainPath = './../Phase 2/My Learner/Train/' + sw(r) + '/'
-        TestPath = './../Phase 2/My Learner/Test/' + sw(r) + '/' 
-        number = persian.enToPersianNumb(r)
-    else :
-        number = random.choice(['ع', 'و', 'ج', 'ت', 'ص', 'ب','ن', 'م', 'ی', 'د', 'ح', 'ل', 'ق', 'س', 'ط','گ'])
-        #number='ق'
-        TrainPath = './../Phase 2/My Learner/Train/' + sw(number) + '/' 
-        TestPath = './../Phase 2/My Learner/Test/' + sw(number) + '/' 
+    # r = random.randint(1,3)
+    # if (r==1):
+    r = random.randint(1,9)
+    TrainPath = './../Phase 2/My Learner/NumTrain/' + sw(r) + '/'
+    TestPath = './../Phase 2/My Learner/NumTest/' + sw(r) + '/' 
+    number = persian.enToPersianNumb(r)
+    # else :
+    #     number = random.choice(['ع', 'و', 'ج', 'ت', 'ص', 'ب','ن', 'م', 'ی', 'د', 'ح', 'ل', 'ق', 'س', 'ط','گ'])
+    #     #number='ق'
+    #     TrainPath = './../Phase 2/My Learner/Train/' + sw(number) + '/' 
+    #     TestPath = './../Phase 2/My Learner/Test/' + sw(number) + '/' 
 
         
 
@@ -84,12 +85,16 @@ for x in range(n):
     img = img.filter(ImageFilter.BLUR)
  
     #SALT AND PEPPER 
-    np.random.seed(42)
-    snp = sparse.random(H, W, density=0.3)*255
-    snp = snp.toarray()
-    snp = Image.fromarray(snp.astype('uint8')).convert('L')
-    mask = Image.new("L", img.size,150)
-    img = Image.composite(img, snp , mask)
+    # np.random.seed(42)
+    # snp = sparse.random(H, W, density=0.3)*255
+    # snp = snp.toarray()
+    # snp = Image.fromarray(snp.astype('uint8')).convert('L')
+    # mask = Image.new("L", img.size,150)
+    # img = Image.composite(img, snp , mask)
+
+    #Gaussian
+    img = img.filter(ImageFilter.GaussianBlur(radius = 2)) 
+
     
     #Perspective
     p = 4
