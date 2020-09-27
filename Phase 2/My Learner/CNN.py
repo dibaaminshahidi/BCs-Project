@@ -19,6 +19,12 @@ from tensorflow.keras.layers import Flatten
 from tensorflow.keras.optimizers import SGD
 from keras.utils import np_utils
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report, confusion_matrix
+import pylab as plt
+import seaborn as sns
+
+
+
 
 # load train and test dataset
 X = []
@@ -26,27 +32,28 @@ trainY =[]
 x = []
 testY =[]
 i = 0
-ch=['1','2','3','4','5','6','7','8','9','D','G','H','L','M','N','S','T','Y','GH','TA','Y','M',
-                'N','T','B','SA','J','E','V']
+# ch=['1','2','3','4','5','6','7','8','9','D','G','H','L','M','N','S','T','Y','GH','TA','Y','M',
+#                 'N','T','B','SA','J','E','V']
+ch=['1','2','3','4','5','6','7','8','9']
 
 def sw(argument): 
     switcher = { 
-        'D':'د',
-        'H': 'ح', 
-        'L': 'ل',
-        'GH':'ق',
-        'S':'س',
-        'TA':'ط',
-        'Y':'ی',
-        'M':'م',
-        'N':'ن',
-        'T':'ت',
-        'B':'ب',
-        'SA':'ص',
-        'G':'گ',
-        'J':'ج',
-        'E':'ع',
-        'V':'و',
+        # 'D':'د',
+        # 'H': 'ح', 
+        # 'L': 'ل',
+        # 'GH':'ق',
+        # 'S':'س',
+        # 'TA':'ط',
+        # 'Y':'ی',
+        # 'M':'م',
+        # 'N':'ن',
+        # 'T':'ت',
+        # 'B':'ب',
+        # 'SA':'ص',
+        # 'G':'گ',
+        # 'J':'ج',
+        # 'E':'ع',
+        # 'V':'و',
         '1': "1", 
         '2': "2", 
         '3': "3", 
@@ -63,7 +70,7 @@ nb_classes = 25
 test = []
 
 for c in ch:
-    path = './Train/'+ c +'/'
+    path = './NumTrain/'+ c +'/'
     for filename in os.listdir(path):
         if(filename!='.DS_Store'):
             im = Image.open(path+filename)
@@ -74,7 +81,7 @@ for c in ch:
             trainY.append(c)
 
 for c in ch:
-    path = './Test/'+ c +'/'
+    path = './NumTest/'+ c +'/'
     n = 0
     for filename in os.listdir(path):
         if(filename!='.DS_Store'):
@@ -128,7 +135,7 @@ model.compile(optimizer='adam',
             metrics=['accuracy'])
 
 
-model.fit(trainX, trainY, epochs =5 ,validation_data=(testX, testY))
+model.fit(trainX, trainY, epochs =1 ,validation_data=(testX, testY))
 
 score = model.evaluate(testX, testY, verbose=0)
 
@@ -145,3 +152,24 @@ for (tl, l) in zip(y, p):
         print("Label", sw(tl) ,"Pred:", sw(l))
         i=i+1
 print (i)
+
+print(confusion_matrix(y,p))
+
+# fig = plt.figure()
+# ax = fig.add_subplot(111)
+# cax = ax.matshow(confusion_matrix(y,p))
+# plt.title('Confusion matrix of the classifier')
+# fig.colorbar(cax)
+# ax.set_xticklabels([''] + ch)
+# ax.set_yticklabels([''] + ch)
+# plt.xlabel('Predicted')
+# plt.ylabel('True')
+# plt.show()
+
+f, ax = plt.subplots(figsize=(9, 9))
+cmap = sns.palplot(sns.diverging_palette(220, 200))
+
+sns.heatmap(confusion_matrix(y,p), annot=True, fmt="d",cmap=cmap,linewidths=.5,cbar=0,xticklabels = ch, yticklabels=ch)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
