@@ -49,95 +49,84 @@ def sw(argument):
     return switcher.get(argument, "") 
 
 
- 
-
+b=0
+#b=1
 n = 1000
+FontList = [ f for f in os.listdir('./../Fonts/') ]
 
+for f in FontList:
+    print(f[:-4])
+    if(f!='.DS_Store'):
+        for x in range(n):
 
-for x in range(n):
+            r = random.randint(1,9)
+            TrainPath = './../Phase 2/My Learner/Train/'+f[:-4]+'/'+ sw(r) + '/'
+            TestPath = './../Phase 2/My Learner/Test/'+ f[:-4] +'/'+sw(r) + '/'
 
-    img = Image.open("./../Assets/Blank.jpg")
-    new_size = (75,75)
-    img = img.resize(new_size)
-    # r = random.randint(1,3)
-    # if (r==1):
-    r = random.randint(1,9)
-    TrainPath = './../Phase 2/My Learner/NumTrain/' + sw(r) + '/'
-    TestPath = './../Phase 2/My Learner/NumTest/' + sw(r) + '/' 
-    number = persian.enToPersianNumb(r)
-    # else :
-    #     number = random.choice(['ع', 'و', 'ج', 'ت', 'ص', 'ب','ن', 'م', 'ی', 'د', 'ح', 'ل', 'ق', 'س', 'ط','گ'])
-    #     #number='ق'
-    #     TrainPath = './../Phase 2/My Learner/Train/' + sw(number) + '/' 
-    #     TestPath = './../Phase 2/My Learner/Test/' + sw(number) + '/' 
+            if(b==1):
+                img = Image.open("./../Assets/Blank.jpg")
+                new_size = (75,75)
+                img = img.resize(new_size)
 
-        
+                number = persian.enToPersianNumb(r)
+                draw = ImageDraw.Draw(img)
+                W, H = img.size
+                fontsize = random.randint(30,60)   
+                font = ImageFont.truetype('./../Fonts/'+ f ,fontsize)
+                #font = ImageFont.truetype("./../Fonts/STITRBD.TTF",fontsize)
+                w, h = font.getsize(number)
+                draw.text(((W-w)/2,((H-h)/2)),number,(10,10,10),font=font,align="center")
 
-
-    draw = ImageDraw.Draw(img)
-    W, H = img.size
-    fontsize = random.randint(30,60)   
-    font = ImageFont.truetype("./../Fonts/STITRBD.TTF",fontsize)
-    w, h = font.getsize(number)
-    draw.text(((W-w)/2,((H-h)/2)),number,(10,10,10),font=font,align="center")
-
-    #BLUR
-    img = img.filter(ImageFilter.BLUR)
- 
-    #SALT AND PEPPER 
-    # np.random.seed(42)
-    # snp = sparse.random(H, W, density=0.3)*255
-    # snp = snp.toarray()
-    # snp = Image.fromarray(snp.astype('uint8')).convert('L')
-    # mask = Image.new("L", img.size,150)
-    # img = Image.composite(img, snp , mask)
-
-    #Gaussian
-    img = img.filter(ImageFilter.GaussianBlur(radius = 2)) 
-
-    
-    #Perspective
-    p = 4
-    for z in range(p):
-        new_img = img
-        width, height = img.size
-        a = random.uniform(-0.2,0.2)
-        xshift = abs(a) * width
-        new_width = width + int(round(xshift))
-        new_img = new_img.transform((new_width, height), Image.AFFINE,
-                (1, a, -xshift if a > 0 else 0, 0, 1, 0), Image.BICUBIC)
-        A = str(a)
-
-        #Rotate
-
-
+                #BLUR
+                #img = img.filter(ImageFilter.BLUR)
             
-        
-        #b=0
-        b=1
-        rand = random.randint(-5,5)
-        R = str(rand)
-        new_img = new_img.rotate(rand)
-        # new_size = (30,30)
-        # new_img = new_img.resize(new_size)
-        new_img = new_img.crop((15,15,60,60))
-        new_size = (50,50)
-        new_img = new_img.resize(new_size)
+                #SALT AND PEPPER 
+                # np.random.seed(42)
+                # snp = sparse.random(H, W, density=0.3)*255
+                # snp = snp.toarray()
+                # snp = Image.fromarray(snp.astype('uint8')).convert('L')
+                # mask = Image.new("L", img.size,150)
+                # img = Image.composite(img, snp , mask)
 
-        if(b==1):
-            c = random.randint(1,4)
-            if(c != 1):
-                new_img.save(TrainPath + A + R + '.jpg')
-            else:               
-                new_img.save(TestPath + A + R + '.jpg')
+                #Gaussian
+                img = img.filter(ImageFilter.GaussianBlur(radius = 1)) 
 
-    if(b==0):
-        filelist = [ f for f in os.listdir(TrainPath) ]
-        for f in filelist:
-            os.remove(os.path.join(TrainPath, f))  
-        filelist = [ f for f in os.listdir(TestPath) ]
-        for f in filelist:
-            os.remove(os.path.join(TestPath, f))  
+                
+                #Perspective
+                p = 4
+                for z in range(p):
+                    new_img = img
+                    width, height = img.size
+                    a = random.uniform(-0.2,0.2)
+                    xshift = abs(a) * width
+                    new_width = width + int(round(xshift))
+                    new_img = new_img.transform((new_width, height), Image.AFFINE,
+                            (1, a, -xshift if a > 0 else 0, 0, 1, 0), Image.BICUBIC)
+                    A = str(a)
+
+                    #Rotate
+                    rand = random.randint(-5,5)
+                    R = str(rand)
+                    new_img = new_img.rotate(rand)
+
+                    new_img = new_img.crop((15,15,60,60))
+                    new_size = (50,50)
+                    new_img = new_img.resize(new_size)
+
+                    #Save
+                    c = random.randint(1,4)
+                    if(c!=1):
+                        new_img.save(TrainPath + A + R + '.jpg')
+                    else:
+                        new_img.save(TestPath + A + R + '.jpg')
+
+            if(b==0):
+                filelist = [ d for d in os.listdir(TrainPath) ]
+                for d in filelist:
+                    os.remove(os.path.join(TrainPath, d))  
+                filelist = [ d for d in os.listdir(TestPath) ]
+                for d in filelist:
+                    os.remove(os.path.join(TestPath, d))  
 
 
             
