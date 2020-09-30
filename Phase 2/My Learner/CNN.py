@@ -20,8 +20,8 @@ from tensorflow.keras.optimizers import SGD
 from keras.utils import np_utils
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, confusion_matrix
-import pylab as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 
@@ -69,6 +69,8 @@ def sw(argument):
 nb_classes = 25
 test = []
 FontList = [ f for f in os.listdir('./../../Fonts/') ]
+
+
 
 for f in FontList:
     X = []
@@ -144,7 +146,7 @@ for f in FontList:
 
         print("Accuracy: %.2f%%" % (score[1]*100))
         
-        p = []
+        acc = [[0 for x in range(9)] for y in range(9)] 
         p = model.predict_classes(testX)
         # p = label_encoder.inverse_transform(p)
         # y = label_encoder.inverse_transform(testY)
@@ -155,13 +157,21 @@ for f in FontList:
         #         print("Label", sw(tl) ,"Pred:", sw(l))
         #         i=i+1
         # print (i)
-
-        print(confusion_matrix(testY,p))
+        cm = confusion_matrix(testY,p)
+        print(cm)
 
         cmap = sns.diverging_palette(260, 200,l= 90,s=60 ,as_cmap=True,sep=120)
-        sns.heatmap(confusion_matrix(testY,p), annot=True, fmt="d",cmap=cmap,linewidths=.5,cbar=1,xticklabels = ch, yticklabels=ch)
+        sns.heatmap(cm, annot=True, fmt="d",cmap=cmap,linewidths=.5,cbar=0,xticklabels = ch, yticklabels=ch)
         plt.title('Font:'+f[:-4]+' Accuracy: %.2f%%' % (score[1]*100))
         plt.xlabel('Predicted')
         plt.ylabel('True')
         plt.savefig('./Confusion Matrix/'+f[:-4]+'.png')
+        plt.clf()  # Clear the figure for the next loop
+        acc = cm/cm.sum(1, keepdims=True)
+        fig, ax = plt.subplots(figsize=(10,10))   
+        sns.heatmap(acc,square=True ,annot=True,cmap=cmap,linewidths=.5,cbar=0,xticklabels = ch, yticklabels=ch)
+        plt.title('Font:'+f[:-4]+' Accuracy: %.2f%%' % (score[1]*100))
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.savefig('./Confusion Matrix/'+'Ratio '+f[:-4]+'.png')
         plt.clf()  # Clear the figure for the next loop
