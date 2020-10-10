@@ -49,8 +49,6 @@ def sw(argument):
     return switcher.get(argument, "") 
 
 b = 1
-
-
 n = 900
 
 names = ["  " for x in range(10)]
@@ -78,7 +76,6 @@ for x in range(n):
             f = 'Traffic.ttf'
             names[3]=f[:-4]
 
-
         elif(r==2): 
             f = 'Farnaz.ttf'
             names[2]= f[:-4]
@@ -86,9 +83,15 @@ for x in range(n):
         elif(r==6): 
             f = 'Morvarid.ttf'
             names[6]= f[:-4]
-        elif(r==9): 
+
+        elif(r==4): 
             f = 'Homa.ttf'
-            names[9]= f[:-4]
+            names[4]= f[:-4]
+
+        # elif(r==9): 
+        #     f = 'Morvarid.ttf'
+        #     names[9]= f[:-4]
+
         else:
             f = 'STITRBD.ttf'
         font = ImageFont.truetype('./../Fonts/'+ f ,fontsize)
@@ -135,6 +138,7 @@ for x in range(n):
             new_img = new_img.resize(new_size)
 
             #Save
+
             c = random.randint(1,4)
             if(c!=1):
                 new_img.save(TrainPath + A + R + '.jpg')

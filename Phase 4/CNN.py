@@ -77,13 +77,20 @@ x = []
 testY =[]
 s = []
 
-scores = open("./Confusion Matrix/Accuracy.txt","a")#append mode 
+
+scores = open("./Accuracy.txt","a")#append mode 
 
 
 with open("Names.txt", "r") as file:
     first_line = file.readline()
 first_line
 scores.write('\n'+first_line+'\n') 
+
+newpath = './Confusion Matrix/'+ first_line
+if not os.path.exists(newpath):
+    os.makedirs(newpath)
+#     print('hey')
+# print('hi')
 
 for c in ch:
     path = './Train/'+ c +'/'
@@ -129,7 +136,7 @@ testY = np.array(testY)
 
 
 
-for i in range(12):
+for i in range(6):
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=trainX.shape[1:4]))
     model.add(Conv2D(64, (3, 3), activation='relu'))
@@ -145,7 +152,7 @@ for i in range(12):
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                 metrics=['accuracy'])
 
-    model.fit(trainX, trainY, epochs =1 ,validation_data=(testX, testY))
+    model.fit(trainX, trainY, epochs =2 ,validation_data=(testX, testY))
 
     score = model.evaluate(testX, testY, verbose=0)
     print("Accuracy: %.2f%%" % (score[1]*100))
@@ -169,7 +176,7 @@ for i in range(12):
     plt.title(str(i)+' Accuracy: %.2f%%' % (score[1]*100))
     plt.xlabel('Predicted')
     plt.ylabel('True')
-    plt.savefig('./Confusion Matrix/'+first_line+' '+str(i)+' '+str(score[1]*100)+' CM.png')
+    plt.savefig('./Confusion Matrix/'+first_line+'/'+first_line+' '+str(i)+' '+str(score[1]*100)+' CM.png')
     plt.clf()  # Clear the figure for the next loop
     acc = cm/cm.sum(1, keepdims=True)
     fig, ax = plt.subplots(figsize=(10,10))   
@@ -177,7 +184,7 @@ for i in range(12):
     plt.title('Accuracy: %.2f%%' % (score[1]*100))
     plt.xlabel('Predicted')
     plt.ylabel('True')
-    plt.savefig('./Confusion Matrix/'+first_line+' '+str(i)+' '+str(score[1]*100)+' Ratio.png')
+    plt.savefig('./Confusion Matrix/'+first_line+'/'+first_line+' '+str(i)+' '+str(score[1]*100)+' Ratio.png')
     plt.clf()  # Clear the figure for the next loop
     scores.write('Accuracy: %.2f%% ' % (score[1]*100))
     s.append(score[1])

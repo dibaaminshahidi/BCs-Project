@@ -1,0 +1,48 @@
+Orginal
+Accuracy: 99.46% Accuracy: 98.59% Accuracy: 99.56% Accuracy: 99.13% Accuracy: 96.84% Accuracy: 99.02% Accuracy: 99.02% Accuracy: 99.35% Accuracy: 99.24% Accuracy: 99.35% Accuracy: 98.91% Accuracy: 98.69% 
+Orginal Average: 98.93% 
+
+2Fa
+Accuracy: 99.77% Accuracy: 99.32% Accuracy: 99.55% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 98.99% Accuracy: 99.10% Accuracy: 98.99% Accuracy: 99.66% Accuracy: 99.44% Accuracy: 99.55% Accuracy: 99.66% 
+2Fa Average: 99.49% 
+
+3Tr
+Accuracy: 98.97% Accuracy: 99.90% Accuracy: 99.28% Accuracy: 99.59% Accuracy: 99.90% Accuracy: 99.17% Accuracy: 98.86% Accuracy: 99.69% Accuracy: 99.48% Accuracy: 97.00% Accuracy: 99.79% Accuracy: 99.90% 
+3Tr Average: 99.29% 
+
+2Fa3Tr
+Accuracy: 99.66% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 99.78% Accuracy: 98.32% Accuracy: 100.00% Accuracy: 99.66% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.66% Accuracy: 99.55% 
+2Fa3Tr Average: 99.70% 
+
+2Fa3Tr6Es
+Accuracy: 98.29% Accuracy: 99.43% Accuracy: 99.89% Accuracy: 99.66% Accuracy: 99.54% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 97.84% Accuracy: 99.32% Accuracy: 99.32% Accuracy: 99.20% Accuracy: 99.43% 
+2Fa3Tr6Es Average: 99.32% 
+
+2Fa3Tr6Mo
+Accuracy: 99.22% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 99.67% Accuracy: 99.44% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.78% Accuracy: 99.78% 
+2Fa3Tr6Mo Average: 99.81% 
+
+
+2Fa3Tr6Mo9Ho
+Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.59% Accuracy: 99.79% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.79% Accuracy: 100.00% Accuracy: 98.45% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.79% 
+2Fa3Tr6Mo9Ho Average: 99.76% 
+
+
+2Fa3Tr4Ho6Mo
+Accuracy: 100.00% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 99.68% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 100.00% 
+2Fa3Tr4Ho6Mo Average: 99.94% 
+
+2Fa3Tr4Ho6Mo9Ho
+Accuracy: 100.00% Accuracy: 99.89% Accuracy: 99.78% Accuracy: 100.00% Accuracy: 99.78% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.56% Accuracy: 99.89% Accuracy: 99.56% 
+2Fa3Tr4Ho6Mo9Ho Average: 99.86% 
+
+
+
+2Fa3Tr4Ho6Mo (2 Epoch)
+Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 100.00% Accuracy: 99.89% Accuracy: 100.00% 
+2Fa3Tr4Ho6Mo Average: 99.96% 
+
+
+Orginal (2 Epoch)
+Accuracy: 99.33% Accuracy: 99.55% Accuracy: 99.89% Accuracy: 99.89% Accuracy: 99.89% Accuracy: 99.78% 
+Orginal Average: 99.72% 
