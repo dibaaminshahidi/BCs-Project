@@ -23,22 +23,20 @@ for x in range(9):
 
     TrainPath = './Train/'+ str(x+1) + '/'
     TestPath = './Test/'+ str(x+1) + '/'
-    r = random.randint(100,111)
+    r = random.randint(100,121)
     for y in range(r):
         if(b==1):
             #img = Image.open("./../Assets/Blank.jpg")
             inpath = './NUMBERS/Font_'+str(x+1)+'.jpg'
             img = Image.open(inpath)        
-            new_size = (1400,1400)
-            img = img.resize(new_size)
             width, height = img.size 
-            rndsize = random.randint(100,160)
+            rndsize = random.randint(90,120)
             left = (width - rndsize)/2
             top = (height - rndsize)/2
             right = (width + rndsize)/2
             bottom = (height + rndsize)/2
             img = img.crop((left, top, right, bottom))
-            new_size = (400,400)
+            new_size = (300,300)
             img = img.resize(new_size)
     
             #BLUR
@@ -72,7 +70,11 @@ for x in range(9):
                 rand = random.randint(-5,5)
                 R = str(rand)
                 new_img = new_img.rotate(rand)
-                new_img = new_img.crop((15,8,67,60))
+                left = (width - 52)/2
+                top = (height - 52)/2
+                right = (width + 52)/2
+                bottom = (height + 52)/2
+                new_img = new_img.crop((left, top, right, bottom))
                 new_size = (80,80)
                 new_img = new_img.resize(new_size)
                 new_size = (50,50)
