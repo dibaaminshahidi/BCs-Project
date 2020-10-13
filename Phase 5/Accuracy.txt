@@ -1,3 +1,7 @@
+Accuracy: 98.59% Accuracy: 99.30% Accuracy: 99.30% Accuracy: 98.73% Accuracy: 98.59% Accuracy: 98.45% Accuracy: 99.15% Accuracy: 99.44% Accuracy: 98.59% Accuracy: 98.03% Accuracy: 99.58% Accuracy: 99.72% 
+Average Original: 98.95% 
+
+---------------------------------------
 Accuracy: 97.59% Accuracy: 99.48% Accuracy: 99.90% Accuracy: 99.79% Accuracy: 99.90% Accuracy: 99.69% Accuracy: 99.69% Accuracy: 98.74% Accuracy: 99.69% Accuracy: 99.90% Accuracy: 100.00% Accuracy: 100.00% 
 Average 1: 99.53% 
 
@@ -7,9 +11,16 @@ Average 2: 99.73%
 
 
 ---------------------------------------
-Accuracy: 99.80% Accuracy: 99.70% Accuracy: 100.00% Accuracy: 99.70% Accuracy: 100.00% Accuracy: 99.70% Accuracy: 99.31% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.90% 
-Average 3: 99.85% 
+Accuracy: 99.80% Accuracy: 99.70% Accuracy: 100.00% Accuracy: 99.80% Accuracy: 100.00% Accuracy: 99.70% Accuracy: 99.31% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.90% 
+Average 3: 99.84% 
 
 ---------------------------------------
 Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.80% Accuracy: 99.80% Accuracy: 100.00% 
 Average 3_2Epochs : 99.92% 
+
+
+
+
+---------------------------------------
+Accuracy: 98.03% Accuracy: 99.86% Accuracy: 99.86% Accuracy: 99.86% Accuracy: 98.59% Accuracy: 98.31% 
+Average Original_2Epochs: 99.08% 
