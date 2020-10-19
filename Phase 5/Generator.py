@@ -16,25 +16,28 @@ import scipy.stats as stats
  
 #Generate 
 
+
 b = 1
+setnum = '6'
 
 for x in range(9):
 
 
     TrainPath = './Train/'+ str(x+1) + '/'
     TestPath = './Test/'+ str(x+1) + '/'
-    r = random.randint(100,121)
+    r = random.randint(100,131)
     for y in range(r):
         if(b==1):
             #img = Image.open("./../Assets/Blank.jpg")
-            inpath = './NUMBERS/Font_'+str(x+1)+'.jpg'
+            inpath = './NUMBERS/'+setnum+'/Font_'+str(x+1)+'.jpg'
             img = Image.open(inpath)        
             width, height = img.size 
-            rndsize = random.randint(90,120)
+            rndsize = random.randint(100,181)
             left = (width - rndsize)/2
-            top = (height - rndsize)/2
             right = (width + rndsize)/2
-            bottom = (height + rndsize)/2
+            bottom = ((height + rndsize)/2)
+            top = ((height - rndsize)/2)
+
             img = img.crop((left, top, right, bottom))
             new_size = (300,300)
             img = img.resize(new_size)
@@ -50,7 +53,7 @@ for x in range(9):
             # img = Image.composite(img, snp , mask)
 
             #Gaussian
-            img = img.filter(ImageFilter.GaussianBlur(radius = 2)) 
+            img = img.filter(ImageFilter.GaussianBlur(radius = 4)) 
 
             #Perspective
             p = 4

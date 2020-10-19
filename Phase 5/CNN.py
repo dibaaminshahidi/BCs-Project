@@ -48,7 +48,7 @@ x = []
 testY =[]
 s = []
 
-setnum = '3_2Epochs 2'
+setnum = '6'
 
 scores = open("./Accuracy.txt","a")
 scores.write('\n---------------------------------------\n') 
@@ -94,10 +94,9 @@ testY = np.array(testY)
 
 
 
-for i in range(6):
+for i in range(1,2):
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=trainX.shape[1:4]))
-    model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(Conv2D(128, (3, 3), activation='relu'))
 
@@ -110,7 +109,7 @@ for i in range(6):
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                 metrics=['accuracy'])
 
-    model.fit(trainX, trainY, epochs =2 ,validation_data=(testX, testY))
+    model.fit(trainX, trainY, epochs =1 ,validation_data=(testX, testY))
 
     score = model.evaluate(testX, testY, verbose=0)
     print("Accuracy: %.2f%%" % (score[1]*100))
@@ -123,7 +122,7 @@ for i in range(6):
 
     cmap = sns.diverging_palette(260, 200,l= 90,s=60 ,as_cmap=True,sep=120)
     sns.heatmap(cm, annot=True, fmt="d",cmap=cmap,linewidths=.5,cbar=0,xticklabels = ch, yticklabels=ch)
-    plt.title(str(i)+' Accuracy: %.2f%%' % (score[1]*100))
+    plt.title(' Accuracy: %.2f%%' % (score[1]*100))
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.savefig('./Confusion Matrix/'+setnum+'/'+str(i+1)+' CM.png')
