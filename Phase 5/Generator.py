@@ -18,13 +18,13 @@ import scipy.stats as stats
 
 
 b = 1
-setnum = '6'
+setnum = 'Original'
 
 for x in range(9):
 
 
-    TrainPath = './Train/'+ str(x+1) + '/'
-    TestPath = './Test/'+ str(x+1) + '/'
+    TrainPath = './../Phase 6/Train/'+ setnum +'/'+str(x+1) + '/'
+    TestPath = './../Phase 6/Test/'+ setnum +'/'+str(x+1) + '/'
     r = random.randint(100,131)
     for y in range(r):
         if(b==1):
