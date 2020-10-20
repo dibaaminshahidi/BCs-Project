@@ -5,6 +5,12 @@ Accuracy: 99.81% Accuracy: 99.90% Accuracy: 99.90% Accuracy: 100.00% Accuracy: 9
 Average 6: 99.90% 
 
 ---------------------------------------
+Original
+CNN Type 0 Epochs: 2
+Accuracy: 100.00% Accuracy: 99.71% Accuracy: 99.71% Accuracy: 100.00% Accuracy: 99.81% Accuracy: 99.81% 
+Average Original: 99.84% 
+
+---------------------------------------
 6
 RandomForestClassifier
 Accuracy 6: 99.32% 
@@ -26,9 +32,9 @@ CNN Type 1 Epochs: 2
 Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% 
 Average 6: 99.98% 
 
-
 ---------------------------------------
 Original
-CNN Type 0 Epochs: 2
-Accuracy: 100.00% Accuracy: 99.71% Accuracy: 99.71% Accuracy: 100.00% Accuracy: 99.81% Accuracy: 99.81% 
-Average Original: 99.84% 
+CNN Type 1 Epochs: 2
+Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.71% Accuracy: 100.00% Accuracy: 100.00% 
+Average Original: 99.94% 
+
