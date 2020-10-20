@@ -1,9 +1,11 @@
 ---------------------------------------
-CNN 2
+6
+CNN Type 0 Epochs: 2
 Accuracy: 99.81% Accuracy: 99.90% Accuracy: 99.90% Accuracy: 100.00% Accuracy: 99.90% Accuracy: 99.90% 
 Average 6: 99.90% 
 
 ---------------------------------------
+6
 RandomForestClassifier
 Accuracy 6: 99.32% 
 ---------------------------------------
@@ -11,26 +13,22 @@ SVC
 Accuracy 6: 100.00% 
 
 ---------------------------------------
-
+Original
 RandomForestClassifier
 Accuracy Original: 96.80% 
 ---------------------------------------
 SVC
 Accuracy Original: 100.00% 
----------------------------------------
-CNN 2
 
 ---------------------------------------
-CNN 2
+6
+CNN Type 1 Epochs: 2
+Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 100.00% Accuracy: 99.90% 
+Average 6: 99.98% 
+
 
 ---------------------------------------
-CNN 2
-
----------------------------------------
-CNN 2
-
----------------------------------------
-CNN 2
-
----------------------------------------
-CNN 2
+Original
+CNN Type 0 Epochs: 2
+Accuracy: 100.00% Accuracy: 99.71% Accuracy: 99.71% Accuracy: 100.00% Accuracy: 99.81% Accuracy: 99.81% 
+Average Original: 99.84% 

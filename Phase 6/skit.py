@@ -77,7 +77,7 @@ svm.SVC()
         ]
 
 for clf in classifiers:
-    scores.write('\n---------------------------------------\n') 
+    scores.write('\n---------------------------------------\n6\n') 
     scores.write(clf.__class__.__name__+'\n') 
     new = './Confusion Matrix/'+setnum+'/'+clf.__class__.__name__
     if not os.path.exists(new):

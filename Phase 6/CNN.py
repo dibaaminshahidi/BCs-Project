@@ -15,7 +15,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Flatten ,Dense,Dropout
 from tensorflow.keras.optimizers import SGD
 from keras.utils import np_utils
 from sklearn.preprocessing import LabelEncoder
@@ -39,7 +39,6 @@ i = 0
 ch=['1','2','3','4','5','6','7','8','9']
 
 
-nb_classes = 25
 test = []
 
 X = []
@@ -48,13 +47,17 @@ x = []
 testY =[]
 s = []
 
-setnum = '6'
+setnum = 'Original'
 epnum = 2
+cnntype = 0
+
+num_classes = 9
+
 
 scores = open("./Accuracy.txt","a")
-scores.write('\n---------------------------------------\nCNN '+str(epnum)+'\n') 
+scores.write('\n\n---------------------------------------\n'+setnum+'\nCNN Type '+str(cnntype)+' Epochs: '+str(epnum)+'\n') 
 
-newpath = './Confusion Matrix/'+setnum+'/CNN'
+newpath = './Confusion Matrix/'+setnum+'/CNN/'+str(cnntype)
 if not os.path.exists(newpath):
     os.makedirs(newpath)
 
@@ -93,17 +96,23 @@ trainY = np.array(trainY)
 testY = np.array(testY)
 
 
-
-
 for i in range(6):
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=trainX.shape[1:4]))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(Conv2D(128, (3, 3), activation='relu'))
+    if ( cnntype == 0):
+        model.add(Flatten())
+        model.add(Dense(64, activation='relu'))
+        model.add(Dense(25))
+    elif( cnntype == 1):
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+        model.add(Flatten())
+        model.add(Dense(256, activation='relu'))
+        model.add(Dropout(0.5))
+        model.add(Dense(25))
 
-    model.add(Flatten())
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(25))
 
 
     model.compile(optimizer='adam',
@@ -126,7 +135,7 @@ for i in range(6):
     plt.title(' Accuracy: %.2f%%' % (score[1]*100))
     plt.xlabel('Predicted')
     plt.ylabel('True')
-    plt.savefig('./Confusion Matrix/'+setnum+'/CNN/'+str(i+1)+' CM.png')
+    plt.savefig('./Confusion Matrix/'+setnum+'/CNN/'+str(cnntype)+'/'+str(i+1)+' CM.png')
     plt.clf()  # Clear the figure for the next loop
     acc = cm/cm.sum(1, keepdims=True)
     fig, ax = plt.subplots(figsize=(10,10))   
@@ -134,11 +143,11 @@ for i in range(6):
     plt.title('Accuracy: %.2f%%' % (score[1]*100))
     plt.xlabel('Predicted')
     plt.ylabel('True')
-    plt.savefig('./Confusion Matrix/'+setnum+'/CNN/'+str(i+1)+' Ratio.png')
+    plt.savefig('./Confusion Matrix/'+setnum+'/CNN/'+str(cnntype)+'/'+str(i+1)+' Ratio.png')
     plt.clf()  # Clear the figure for the next loop
     scores.write('Accuracy: %.2f%% ' % (score[1]*100))
     s.append(score[1])
 avrg = statistics.mean(s)*100
-scores.write('\n'+ 'CNN '+ str(epnum)+'Average '+setnum+': %.2f%% \n' %(avrg)) 
+scores.write('\nAverage '+setnum+': %.2f%% \n' %(avrg)) 
 scores.close()
 
