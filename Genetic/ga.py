@@ -5,10 +5,20 @@ from deap import creator
 from deap import tools
 import os
 from PIL import Image
-
 import numpy as np
 from fitness import fitness_for_a_pic
 import matplotlib.pyplot as plt
+
+import cv2
+
+
+
+def counter(img):
+    contours, hierarchy= cv2.findContours(img.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    number_of_objects_in_image= len(contours)
+    return number_of_objects_in_image
+
+
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
 
@@ -25,19 +35,24 @@ def evalOneMax(individual):
 
     pic = np.array(individual)
     pic = np.reshape(pic , (pic.shape[0], 50,50,1))
-    print(pic.shape)
-    
+    # print(pic.shape)
+    # exit(1)
     loss = fitness_for_a_pic(pic , 3)
+    for i in range(pic.shape[0]):
+        img = pic[i,:]
+        if counter(1- np.squeeze(img)) > 1:
+            loss[i] = -500
     return loss
 
 
 def plotter(pic):
     pic = np.array(pic)
-    pic = np.reshape(pic , (50,50,1))
+    pic = np.reshape(pic , (50,50))
     plt.imshow(pic)
     plt.show()
+    plt.close()
 
-def load_some_shit(number = 3 , count = 10):
+def load_some_pics(number = 3 , count = 10):
     path = './Train/Original/'+ str(number) +'/'
     X = []
     total = 0
@@ -59,11 +74,12 @@ toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
 toolbox.register("select", tools.selTournament, tournsize=3)
 
+new_Pop = []
 
 def main():
     pop = toolbox.population(n=300)
-    count = 10
-    init_pop = load_some_shit(count= count)
+    count = 300
+    init_pop = load_some_pics(count= count)
     for i in range(count):
         for j in range(init_pop.shape[1]):
             pop[i][j] = init_pop[i][j]
@@ -76,17 +92,28 @@ def main():
     #       are crossed
     #
     # MUTPB is the probability for mutating an individual
-    CXPB, MUTPB = 0.5, 0.2
+    CXPB, MUTPB = 0.3, 0.1
     # Extracting all the fitnesses of 
     fits = [ind.fitness.values[0] for ind in pop]
     # Variable keeping track of the number of generations
     g = 0
     # Begin the evolution
-    while max(fits) < 100 and g < 1000:
+    wt = []
+    rt = []
+    cntt = 1
+    while max(fits) < 100 and g < 301:
         # A new generation
         g = g + 1
         print("-- Generation %i --" % g)
         # Select the next generation individuals
+
+
+        if (g == 301):
+            new_pop = np.array(new_Pop)
+            for i in range(count):
+                for j in range(new_pop.shape[1]):
+                    pop[i][j] = new_pop[i][j]
+            
         offspring = toolbox.select(pop, len(pop))
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
@@ -113,22 +140,34 @@ def main():
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
         
-        if(g %10 == 1):
-            mn = max(fits)
-            for ind, fit in zip(pop, fits):
-                if fit == mn :
-                    plotter(ind)
-                    break
+        mn = max(fits)
+        for ind, fit in zip(pop, fits):
+            if fit == mn :
+                # plotter(ind)
+                new_Pop.append(ind)
+                # break
 
         length = len(pop)
         mean = sum(fits) / length
         sum2 = sum(x*x for x in fits)
         std = abs(sum2 / length - mean**2)**0.5
         
+        rm = []
+        for q in fits:
+            if not q == -500:
+                rm.append(q)
+        
+        wt.append(sum(rm)/len(rm))
+        rt.append(cntt)
+        cntt+=1
+
         print("  Min %s" % min(fits))
         print("  Max %s" % max(fits))
         print("  Avg %s" % mean)
         print("  Std %s" % std)
+    
+    # plt.plot(rt , wt)
+    # plt.show()
 
 if __name__ == '__main__': 
     main()
